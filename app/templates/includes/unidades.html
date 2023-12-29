@@ -1,0 +1,40 @@
+ <div class="container-fluid">
+        <div class="row mt-1">
+            <div class="ml-auto mr-3">                                
+                <a class="btn-add-escola toogle-hide " id="addEscolaBtn" href="" data-element="#telaCadastroEscola"><i class="fa fa-2x fa-plus-circle text-info m-2" aria-hidden="true"></i></a>                   
+            </div>
+        </div>
+        <div class="row mt-2">
+            <table class="table table-hover text-center">
+                <thead class="bg-gray">
+                <tr>                            
+                    <th scope="col">Unidades</th>
+                    <th scope="col">Turmas</th>
+                    <th scope="col">Equipe</th>
+                    <th scope="col">Alunos</th>
+                    <th scope="col">Acervo</th>
+                    <th scope="col">Info</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if unidades %}
+                  {% for unidade in unidades %}
+                    <tr>                            
+                      <td>{{ unidade['nome'] }}</td>
+                      <td>{{ unidade['turma'] }}</td>
+                      <td>{{ unidade['equipe'] }}</td>
+                      <td>{{ unidade['aluno'] }}</td>
+                      <td>{{ unidade['acervo'] }}</td>
+                      <td> 
+                          <a href="" class="response toogle-hide ml-auto open-info-escola" data-element="#dataInfoEscola" data-pane='unidade' data-id="{{unidade['id']}}"><i class='bx bx-file-find text-info mt-auto' style="font-size: 1.75rem"></i>
+                          </a>                                 
+                      </td>
+                    </tr>
+                  {% endfor %} 
+                  {% endif %}                           
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+

@@ -1,0 +1,129 @@
+{% if formCreateUnd %}
+  <div class="bg-container justify-content-center">
+    <div class="background-dark"></div>
+    <div class="tela-add-escola tela-add-item border rounded shadow p-4 bg-white">
+      <form action="" method="POST">
+        {% if formCreateUnd %}
+          {{ formCreateUnd.hidden_tag() }}
+          <div class="text-center mb-3">
+            <span class="h5 text-info font-weight-bold">Cadastro de Unidade</span>
+            <button class="close btn-add-escola toogle-hide" data-element="#telaCadastroEscola" data-dismiss="tela-add-escola" aria-label="Fechar"><span class="btn-add-escola toogle-hide m-3" aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="form-group">
+            <label for="nomeEscola">Nome da Unidade</label>
+            {% if formCreateUnd.nome.errors %}
+              {{ formCreateUnd.nome(class = 'form-control is-invalid') }}
+              {% for error in formCreateUnd.nome.errors %}
+                <div class="invalid-feedback">
+                  <span>{{ error }}</span>
+                </div>
+              {% endfor %}
+            {% else %}
+              {{ formCreateUnd.nome(class = 'form-control', placeholder = 'nome') }}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Endereço</label>
+            {% if formCreateUnd.endereco.errors %}
+              {{ formCreateUnd.endereco(class = 'form-control is-invalid') }}
+              {% for error in formCreateUnd.endereco.errors %}
+                <div class="invalid-feedback">
+                  <span>{{ error }}</span>
+                </div>
+              {% endfor %}
+            {% else %}
+              {{ formCreateUnd.endereco(class = 'form-control', placeholder = 'Rua XV de Novembro, nº 0') }}
+            {% endif %}
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputBairro">Bairro</label>
+              {% if formCreateUnd.bairro.errors %}
+                {{ formCreateUnd.bairro(class = 'form-control is-invalid') }}
+                {% for error in formCreateUnd.bairro.errors %}
+                  <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+                  </div>
+                {% endfor %}
+              {% else %}
+                {{ formCreateUnd.bairro(class = 'form-control', placeholder = 'bairro') }}
+              {% endif %}
+            </div>
+            <div class="form-group col-md-5">
+              <label for="inputTelefone">Cidade</label>
+              {% if formCreateUnd.cidade.errors %}
+                {{ formCreateUnd.cidade(class = 'form-control is-invalid') }}
+                {% for error in formCreateUnd.cidade.errors %}
+                  <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+                  </div>
+                {% endfor %}
+              {% else %}
+                {{ formCreateUnd.cidade(class = 'form-control', placeholder = 'cidade') }}
+              {% endif %}
+            </div>
+            <div class="form-group col-md-3">
+              <label for="inputCEP">CEP</label>
+              {% if formCreateUnd.cep.errors %}
+                {{ formCreateUnd.cep(class = 'form-control is-invalid') }}
+                {% for error in formCreateUnd.cep.errors %}
+                  <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+                  </div>
+                {% endfor %}
+              {% else %}
+                {{ formCreateUnd.cep(class = 'form-control', placeholder = 'CEP') }}
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nomeGestor">Responsável</label>
+            {% if formCreateUnd.gestor.errors %}
+              {{ formCreateUnd.gestor(class = 'form-control is-invalid') }}
+              {% for error in formCreateUnd.gestor.errors %}
+                <div class="invalid-feedback">
+                  <span>{{ error }}</span>
+                </div>
+              {% endfor %}
+            {% else %}
+              {{ formCreateUnd.gestor(class = 'form-control', placeholder = 'Nome do Gestor') }}
+            {% endif %}
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputTelefone">Telefone</label>
+              {% if formCreateUnd.telefone.errors %}
+                {{ formCreateUnd.telefone(class = 'form-control is-invalid') }}
+                {% for error in formCreateUnd.telefone.errors %}
+                  <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+                  </div>
+                {% endfor %}
+              {% else %}
+                {{ formCreateUnd.telefone(class = 'form-control', placeholder = 'telefone') }}
+              {% endif %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail">Email</label>
+              {% if formCreateUnd.email.errors %}
+                {{ formCreateUnd.email(class = 'form-control is-invalid') }}
+                {% for error in formCreateUnd.email.errors %}
+                  <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+                  </div>
+                {% endfor %}
+              {% else %}
+                {{ formCreateUnd.email(class = 'form-control', placeholder = 'email') }}
+              {% endif %}
+            </div>
+          </div>
+          <div class="d-none">{{ formCreateUnd.type(value = 'formCreateUnd') }}</div>
+          <div class="text-center mt-3">
+            {{ formCreateUnd.submit(class = 'btn btn-primary text-white') }}
+            <button type="submit" class="btn btn-secondary ml-4 btn-add-escola toogle-hide" data-element="#telaCadastroEscola">Cancelar</button>
+          </div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}Administração{% endblock %}
+
+{% block pageCurrent %}Administração{% endblock  %}
+
+{% block body %}
+{{pane}}
+<!--Conteudo Principal de Cada Pagina-->
+<div class="main mx-auto widht-page">
+    <div class="wrapper wrapper-tab border p-4 rounded shadow bg-white">        
+        <div>
+            <!--NavTab para os dados das Escolas / Equipe / Alunos-->
+            <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                <a {% if (not pane or pane == 'unidade') and (not pane_t and not pane_e)  %}
+                      class="nav-item nav-link nav_link_table toogle-hide text-dark active"
+                    {% else %}
+                      class="nav-item nav-link nav_link_table toogle-hide text-dark"
+                    {% endif %}                
+                id="nav-escolas-tab" data-toggle="tab" href="#nav-escolas" role="tab" aria-controls="nav-escolas" aria-selected="false" data-element=".hide-toggle-tab">Unidades</a>
+                <a {% if pane_t == "turma" or pane == 'turma' %}
+                    class="nav-item nav-link nav_link_table toogle-hide text-dark active"
+                  {% else %}
+                    class="nav-item nav-link nav_link_table toogle-hide text-dark"
+                  {% endif %}  
+                class="nav-item nav-link nav_link_table toogle-hide text-dark " id="nav-cursos-tab" data-toggle="tab" href="#nav-cursos " role="tab" aria-controls="nav-cursos" aria-selected="false">Turmas</a>
+                <a {% if pane_e == "equipe" or pane == 'equipe' %}
+                      class="nav-item nav-link nav_link_table toogle-hide text-dark active"
+                    {% else %}
+                      class="nav-item nav-link nav_link_table toogle-hide text-dark"
+                  {% endif %}  
+                class="nav-item nav-link nav_link_table toogle-hide text-dark " id="nav-equipe-tab" data-toggle="tab" href="#nav-equipe" role="tab" aria-controls="nav-equipe" aria-selected="true">Equipe</a>             
+            </div>
+           
+        </div>
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <!--Painel referente aos dados das Unidades da Ensino-->
+            {% if (not pane or pane == 'unidade') and (not pane_t and not pane_e)   %}
+            <div class="tab-pane fade show active tela-wrapper-table" id="nav-escolas" role="tabpanel" aria-labelledby="nav-escolas-tab">
+            {% else %}
+            <div class="tab-pane fade tela-wrapper-table" id="nav-escolas" role="tabpanel" aria-labelledby="nav-escolas-tab">
+            {% endif %} 
+            {% include 'includes/unidades.html'%}
+            </div>
+
+            <!--Painel referente aos dados das Turmas da organização-->
+            {% if pane_t == "turma" or pane == 'turma' %}
+            <div class="tab-pane fade show active tela-wrapper-table" id="nav-cursos" role="tabpanel" aria-labelledby="nav-cursos-tab">
+            {% else %}
+            <div class="tab-pane fade tela-wrapper-table" id="nav-cursos" role="tabpanel" aria-labelledby="nav-cursos-tab">
+            {% endif %} 
+            {% include 'includes/turmas.html'%}
+
+            <!--Painel referente aos dados da Equipe da organização-->
+            {% if pane_e == "equipe" or pane == 'equipe' %}
+            <div class="tab-pane fade show active tela-wrapper-table" id="nav-equipe" role="tabpanel" aria-labelledby="nav-equipe-tab">
+            {% else %}
+            <div class="tab-pane fade tela-wrapper-table" id="nav-equipe" role="tabpanel" aria-labelledby="nav-equipe-tab">
+            {% endif %} 
+            {% include 'includes/equipes.html'%}
+        </div>
+    </div>
+</div>
+    
+
+<!--Tabela com os dados da escola selecionada-->
+  {% include 'includes/unidade_select.html'%}        
+
+<!--Tabela com os dados da turma selecionada-->
+  {% include 'includes/turma_select.html'%}
+
+<!--Tabela com os dados da Equipe selecionada-->
+  {% include 'includes/equipe_select.html'%}
+
+<br>
+
+
+<!--Modal para adicional Escola-->
+<div class="hidden hide-container" id="telaCadastroEscola"> 
+  {% include 'includes/add_unidade.html'%}
+</div>
+
+<!--Modal para adicional Turma-->
+{% include 'includes/add_turma.html'%}
+
+<!--Modal para adicional Equipe-->
+{% include 'includes/add_equipe.html'%}
+
+<!--Modal para editar Escola-->
+{% if pane == "unidade" %}
+<div class="" >
+  {% else %}
+<div class="hidden hide-container">
+  {% endif %}  
+{% include 'includes/edit_unidade.html'%}
+</div>
+
+<!--Modal para editar Escola-->
+{% if pane == "turma" %}
+<div class="" >
+  {% else %}
+<div class="hidden hide-container">
+  {% endif %}  
+{% include 'includes/edit_turma.html'%}
+</div>
+
+
+
+
+{% endblock  %}
+
+
+
+
+

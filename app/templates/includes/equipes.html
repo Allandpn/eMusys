@@ -1,0 +1,40 @@
+
+    <div class="container-fluid">
+        <div class="row mt-1">
+            <div class="ml-auto mr-3">                                
+                <a class="btn-add-equipe toogle-hide" id="addEquipeBtn" href="#" data-element="#telaCadastroEquipe"><i class="fa fa-2x fa-plus-circle text-info m-2" aria-hidden="true"></i></a>                   
+            </div>
+        </div>
+        <div class="row mt-2">
+            <table class="table table-hover text-center">
+                <thead class="bg-gray">
+                <tr>                            
+                    <th scope="col">Nome</th>                                    
+                    <th scope="col">Função</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Editar</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if equipes %}
+                {% for equipe in  equipes %}
+                  <tr>                            
+                    <td>{{ equipe['nome']}}</td>
+                    <td>{{ equipe['funcao']}}</td>
+                    <td>{{ equipe['telefone']}}</td>
+                    <td>{{ equipe['email']}}</td>
+                    <td> 
+                        <a href="#" class="open-info-equipe toogle-hide ml-auto" data-element="#dataInfoEquipe" data-pane="equipe" data-id= "{{equipe['id']}}"><i class='bx bx-file-find text-info mt-auto' style="font-size: 1.75rem"></i></a>                                 
+                    </td>
+                </tr>
+                {% endfor %} 
+                {% endif %}                                         
+                </tbody>
+            </table>
+        </div>                
+    </div>
+
+</div>
+</div>
+</div>

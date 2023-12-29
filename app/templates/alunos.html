@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}Alunos{% endblock %}
+
+{% block pageCurrent %}Alunos{% endblock  %}
+
+{% block body %}
+
+<!--Conteudo Principal de Cada Pagina-->
+<div class="main mx-auto widht-page">
+    <div class="wrapper wrapper-tab border p-4 rounded shadow bg-white" style="overflow-x: auto;">
+
+        <!--Painel referente aos dados dos Alunos-->        
+        <div class="container-fluid" >
+            <div class="row mt-1">
+                <div class="text-muted">
+                    <h5>Alunos Orquestra Escola Criarte</h5>
+                </div>
+                <div class="ml-auto mr-3">                                
+                    <a class="btn-add-aluno toogle-hide" id="addAlunoBtn" href="#" data-element="#telaCadastroAluno"><i class="fa fa-2x fa-plus-circle text-info m-2" aria-hidden="true"></i></a>                   
+                </div>
+            </div>
+            <div class="row mt-2 tela-wrapper-table">
+                <table class="table table-hover tela-wrapper-table" id="table-alunos">
+                    <thead class="bg-gray">
+                        <tr>
+                            <th scope="col"><span class="mr-3 ">Nome</span><a href="#" ><i class="fa fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Unidade</span><a href="#"><i class="fa fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Turma</span><a href="#"><i class="fa fa-sort text-muted mr-0" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Instrumento</span><a href="#"><i class="fa fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Data Admissão</span><a href="#"><i class="fa fa-sort text-muted" aria-hidden="true"></i></a></th>                            
+                            <th scope="col"><span class="mr-3 ">Info</span><a href="#"><i class="fa fa-sort text-muted" aria-hidden="true"></i></a></th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if alunos %}
+                        {% for aluno in  alunos %}
+                        <tr>
+                            <td>{{ aluno['nome'] }}</td>
+                            <td>{{ aluno['unidade'] }}</td>
+                            <td>{{ aluno['turma'] }}</td>
+                            <td>{{ aluno['instrumento'] }}</td>
+                            <td>{{ aluno['data_admissao'] }}</td><td>
+                              <a href="" class="open-info-aluno toogle-hide ml-auto"data-element="#dataInfoAluno" data-id="{{aluno['id']}}"><i class="bx bx-file-find text-info mt-auto" style="font-size: 1.75rem"></i></a>
+                            </td>
+                          </tr>
+                      {% endfor %} 
+                      {% endif %}                                   
+                      </tbody>
+                </table>
+            </div>                
+        </div>
+        
+    </div>
+</div>   
+
+
+
+<!--Tabela com os dados do Aluno selecionada-->
+{% include "includes_alunos/aluno_select.html" %}
+
+<br>
+
+
+<!--Modal para adicional Aluno-->
+{% include 'includes_alunos/add_aluno.html'%}
+
+
+<!--Modal para adicional Aluno-->
+{% include 'includes_alunos/edit_aluno.html'%}
+
+
+{% endblock  %}

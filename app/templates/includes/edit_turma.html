@@ -1,0 +1,132 @@
+{% if  formEditTurma %}
+    <div class="bg-container justify-content-center" >
+            <div class="background-dark">
+            </div>
+            <div class="tela-edit-escola tela-add-item border rounded shadow p-4 bg-white" >
+            
+            <form action="" method="POST">
+                {{ formEditTurma.hidden_tag() }}
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro de Turma</span>
+                    <a href="{{url_for('admin.admin_path', path='turma' )}}" class="close ">
+                        <span  class="btn-edit-escola toogle-hide m-3" aria-hidden="true">&times;</span>
+                        </a>
+                </div>
+                <div class="form-group">
+                    <label for="nomeCurso">Nome do Turma</label>
+                    {% if formEditTurma.nome.errors %}
+                    {{ formEditTurma.nome(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.nome.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.nome(class='form-control', placeholder='Nome da Turma')}} 
+                  {% endif %} 
+                </div>
+                <div class="form-group">
+                    <label for="nomeUnidade">Unidade de Ensino</label>
+                    {% if formEditTurma.unidade.errors %}
+                    {{ formEditTurma.unidade(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.unidade.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.unidade(class='form-control', placeholder='Nome da Unidade')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="instrumentoCurso">Instrumento</label>
+                    {% if formEditTurma.instrumento.errors %}
+                    {{ formEditTurma.instrumento(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.instrumento.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.instrumento(class='form-control', placeholder='Nome do Instrumento')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="diaDaSemana">Dia da Semana</label>
+                    {% if formEditTurma.dia_semana.errors %}
+                    {{ formEditTurma.dia_semana(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.dia_semana.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.dia_semana(class='form-control')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="horario">Horário: </label>
+                    {% if formEditTurma.horario.errors %}
+                    {{ formEditTurma.horario(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.horario.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.horario(class='form-control')}} 
+                  {% endif %}                         
+                </div>
+                <div class="form-group">
+                    <label for="inputCoordenador">Coordenador do Curso</label>
+                    {% if formEditTurma.nome_coordenador.errors %}
+                    {{ formEditTurma.nome_coordenador(class='form-control is-invalid')}}
+                      {% for error in formEditTurma.nome_coordenador.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditTurma.nome_coordenador(class='form-control')}} 
+                  {% endif %} 
+                </div>
+                <div class="d-none">
+                    {{ formEditTurma.type( value='formEditTurma')}} 
+                </div>
+                <div class="d-none">
+                    {{ formEditTurma.id()}} 
+                </div>
+                <div class="text-center mt-3 row justify-content-center">
+                    <div class="col-10">
+                        {{ formEditTurma.submit(class='btn btn-primary text-white submit_update_unidade')}}
+                        <a href="{{url_for('admin.admin_path', path='turma' )}}" class="btn btn-secondary ml-4 " >Cancelar</a>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target=".deleteModal">Remover</button>
+                </div>
+            </form>
+                    
+        </div>
+        
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Apagar Turma?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+    <form action="{{url_for('admin.delete_turma', id=formEditTurma.id.data )}}" method="POST">
+        <input class="btn btn-danger" type="submit" value="Apagar">
+    </form>
+</div>
+</div>
+</div>
+{% endif %}
+

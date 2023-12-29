@@ -1,0 +1,89 @@
+
+{% extends "layout_login.html" %}
+
+    {% block access %}
+
+      <form class="p-4 bg-white border-bottom" action="" method="POST" style=" 
+                        opacity: 0.9;
+                        ">
+                {{ form.hidden_tag() }}
+                <div class="mb-5 text-center">
+                  <h3 class="text-info">Orquestra Criarte Digital</h3>
+                </div>
+                <div class="form-group">
+                  <label for="inputUsuario">Usuario</label>
+                  {% if form.usuario.errors %}
+                    {{ form.usuario(class='form-control is-invalid')}}
+                      {% for error in form.usuario.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ form.usuario(class='form-control', placeholder='usuario')}} 
+                  {% endif %}                  
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail">Email</label>
+                  {% if form.email.errors %}
+                    {{ form.email(class='form-control is-invalid')}}
+                      {% for error in form.email.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.email(class='form-control', placeholder='email')}}  
+                  {% endif %}                
+                </div>
+                <div class="form-group mb-2 text-dark">
+                  <label for="inputPassword">Senha</label>
+                  {% if form.password.errors %}
+                    {{ form.password(class='form-control is-invalid')}}
+                      {% for error in form.password.errors %}                        
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}                    
+                  {% else %}
+                    {{ form.password(class='form-control', placeholder='senha')}}  
+                  {% endif %}                
+                </div>        
+                <div class="form-group mb-2 text-dark">
+                  <label for="confirmPassword">Confirme a senha</label>
+                  {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class='form-control is-invalid')}}
+                      {% for error in form.confirm_password.errors %}
+                        <div class="invalid-feedback">                      
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}                    
+                  {% else %}
+                  {{ form.confirm_password(class='form-control', placeholder='confirme a senha')}}  
+                  {% endif %}                
+                </div>
+                <div class="form-group">
+                  <label for="checksum">Chave de Acesso</label>
+                  {% if form.checksum.errors %}
+                    {{ form.checksum(class='form-control is-invalid')}}                    
+                      {% for error in form.checksum.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}                    
+                  {% else %} 
+                    {{ form.checksum(class='form-control', placeholder='chave de acesso')}}
+                  {% endif %}                
+                </div>       
+                <div class="text-center mt-3">
+                  {{ form.submit(class='btn btn-primary text-white')}}
+                </div>
+                <div class="form-group mt-3 d-flex">                
+                  <small class="mx-auto"><a class="form-text text-secondary text-muted text-right" href="{{url_for('user.login')}}">Entra com uma conta</a></small>
+                </div>
+      </form>
+
+    {% endblock  %}
+
+
+            

@@ -1,0 +1,39 @@
+
+    <div class="container-fluid">
+        <div class="row mt-1">
+            <div class="ml-auto mr-3">                                
+                <a class="btn-add-curso toogle-hide" id="addCursoBtn" href="#" data-element="#telaCadastroCurso"><i class="fa fa-2x fa-plus-circle text-info m-2" aria-hidden="true"></i></a>                   
+            </div>
+        </div>
+        <div class="row mt-2">
+            <table class="table table-hover text-center">
+                <thead class="bg-gray">
+                <tr>                            
+                    <th scope="col">Turma</th>
+                    <th scope="col">Unidade</th>
+                    <th scope="col">Dia da Semana</th>
+                    <th scope="col">Horário</th>
+                    <th scope="col">Alunos</th>
+                    <th scope="col">Editar</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {% if turmas %}  
+                  {% for turma in  turmas %}
+                  <tr>                            
+                    <td>{{ turma['nome']}}</td>
+                    <td>{{ turma['unidade']}}</td>
+                    <td>{{ turma['dia_semana']}}</td>
+                    <td>{{ turma['horario']}}</td>
+                    <td>{{ turma['alunos']}}</td>
+                    <td> 
+                        <a href="" class="response toogle-hide open-info-turma ml-auto" data-element="#dataInfoTurma" data-pane="turma" data-id= "{{turma['id']}}" ><i class='bx bx-file-find text-info mt-auto' style="font-size: 1.75rem"></i></a>                                 
+                    </td>
+                </tr>
+                {% endfor %} 
+                {% endif %}                                   
+                </tbody>
+            </table>
+            </div> 
+    </div>
+</div>

@@ -1,0 +1,162 @@
+{% if  formEditUnd %}
+    <div class="bg-container justify-content-center" >
+            <div class="background-dark">
+            </div>
+            <div class="tela-edit-escola tela-add-item border rounded shadow p-4 bg-white" >
+                
+                <form action="" method="POST">                    
+                    {{ formEditUnd.hidden_tag() }}
+                    <div class="text-center mb-3">
+                        <span class="h5 text-info font-weight-bold">Cadastro de Escola</span>
+                        <a href="{{url_for('admin_path', path='unidade')}}" class="close ">
+                            <span  class="btn-edit-escola toogle-hide m-3" aria-hidden="true">&times;</span>
+                            </a>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeEscola">Nome da Escola</label>
+                        {% if formEditUnd.nome.errors %}
+                        {{ formEditUnd.nome(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.nome.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.nome(class='form-control', placeholder='nome')}} 
+                      {% endif %} 
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Endereço</label>
+                        {% if formEditUnd.endereco.errors %}
+                        {{ formEditUnd.endereco(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.endereco.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.endereco(class='form-control', placeholder="Rua XV de Novembro, nº 0")}} 
+                      {% endif %} 
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        <label for="inputBairro">Bairro</label>
+                        {% if formEditUnd.bairro.errors %}
+                        {{ formEditUnd.bairro(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.bairro.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.bairro(class='form-control', placeholder="bairro")}} 
+                      {% endif %}
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputTelefone">Cidade</label>
+                            {% if formEditUnd.cidade.errors %}
+                        {{ formEditUnd.cidade(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.cidade.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.cidade(class='form-control', placeholder="cidade")}} 
+                      {% endif %}
+                        </div>
+                        <div class="form-group col-md-3">
+                        <label for="inputCEP">CEP</label>
+                        {% if formEditUnd.cep.errors %}
+                        {{ formEditUnd.cep(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.cep.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.cep(class='form-control', placeholder="CEP")}} 
+                      {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeGestor">Responsável</label>
+                        {% if formEditUnd.gestor.errors %}
+                        {{ formEditUnd.gestor(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.gestor.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.gestor(class='form-control')}} 
+                      {% endif %} 
+                    </div>
+                    <div class="form-row">                        
+                        <div class="form-group col-md-6">
+                            <label for="inputTelefone">Telefone</label>
+                            {% if formEditUnd.telefone.errors %}
+                        {{ formEditUnd.telefone(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.telefone.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.telefone(class='form-control', placeholder="telefone")}} 
+                      {% endif %}
+                        </div>
+                        <div class="form-group col-md-6">
+                        <label for="inputEmail">Email</label>
+                        {% if formEditUnd.email.errors %}
+                        {{ formEditUnd.email(class='form-control is-invalid')}}
+                          {% for error in formEditUnd.email.errors %}
+                            <div class="invalid-feedback">
+                              <span>{{error}}</span>
+                            </div>
+                          {% endfor %}
+                      {% else %} 
+                        {{ formEditUnd.email(class='form-control', placeholder="email")}} 
+                      {% endif %}
+                        </div>
+                    </div>
+                    <div class="d-none">
+                        {{ formEditUnd.type( value='formEditUnd')}} 
+                    </div>
+                    <div class="d-none">
+                        {{ formEditUnd.id()}} 
+                    </div>
+                    <div class="text-center mt-3 row justify-content-center">
+                        <div class="col-10">
+                            {{ formEditUnd.submit(class='btn btn-primary text-white submit_update_unidade')}}
+                            <a href="{{url_for('admin.admin_path', path='unidade')}}" class="btn btn-secondary ml-4 " >Cancelar</a>
+                        </div>
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target=".deleteModal">Remover</button>
+                    </div>
+                </form>
+                    
+                </div>
+                
+            </div>
+    </div>
+
+ <!-- Modal -->
+ <div class="modal fade deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Apagar Unidade?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <form action="{{url_for('admin.delete_unidade', id=formEditUnd.id.data )}}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Apagar">
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+

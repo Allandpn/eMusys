@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Arquivo Bootstrap versao 4.1-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Arquivo para icones Boxicons ultima versao-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--Arquivo para icones FontAwesome ultima versao-->
+    <script src="https://kit.fontawesome.com/074fbb8e37.js" crossorigin="anonymous"></script>
+    <!--Arquivo css local para configuracoes slidebar responsivo-->
+    <link rel="stylesheet" href={{ url_for('static', filename='layout-slidebar.css')}} />
+    <link rel="stylesheet" href={{ url_for('static', filename='main.css')}} />
+    <title>{% block title %}{% endblock %} - Orquestra Criate Digital</title>
+</head>
+<body  id="body-pd">
+<header class="header " id="header">    
+        <div class="header_toggle">
+            <i class="bx bx-menu" id="header-toggle"></i>
+        </div>   
+        <div class="title-page ml-4 mr-auto ">
+           <span class="text-secondary" style="font-size: 22px;">{% block pageCurrent %}{% endblock %}</span>
+        </div>      
+        <div >
+            <ul class="nav">
+                <li class="nav-item">                    
+                    <div class="perfil-icon text-secondary" data-element="#id-perfil-menu-box">
+                            <img class="rounded-circle account-img" src="{{ image_file }}">
+                            <i class='bx bx-chevron-down nav_icon'></i> 
+                    </div>                                    
+                </div> 
+            </ul> 
+        </div>
+
+        <div class="flash_messages d-flex container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class='mx-auto text-center alert alert-{{ category }}'>
+                    <span class="p-2">{{ message }}</span>                    
+                  </div>
+                {% endfor %}
+              {% endif %}  
+            {% endwith %}
+          </div>
+        
+</header>
+<aside class="l-navbar" id="nav-bar">
+    <nav class="nav nav-slidebar">        
+            <a href="{{url_for('main.dashboard')}}" class="nav_logo">
+                <i class="bx bx-layer nav_logo-icon"></i>
+                <span class="nav_logo-name">Orq. Criarte Digital</span>
+            </a>
+            <div class="nav_list mb-auto">
+                <a href="{{url_for('main.dashboard')}}" class="nav_link " >
+                    <i class='bx bx-tachometer nav_icon'></i>
+                    <span class="nav-name">Dashboard</span>
+                </a>
+                <a href="{{url_for('admin.admin_home')}}" class="nav_link " >
+                    <i class='bx bxs-cog nav_icon'></i>
+                    <span class="nav-name">Administração</span>
+                </a>
+                <a href="{{url_for('aluno.alunos')}}" class="nav_link " >
+                    <i class='bx bxs-user-detail nav_icon'></i>
+                    <span class="nav-name">Alunos</span>
+                </a>
+                <a href="{{url_for('acervo.acervo_home')}}" class="nav_link " >
+                    <i class='bx bxs-playlist nav_icon' ></i>
+                    <span class="nav-name">Acervo</span>
+                </a> 
+                <a href="#" class="nav_link " style="color: gray; pointer-events: none;">
+                    <i class='bx bx-dollar-circle nav_icon'></i>
+                    <span class="nav-name">Financeiro</span>
+                </a>                               
+            </div>
+            <div class="d-flex " id="id-system-version" style="color: #ebebeb; display: none; position: absolute; bottom: 10px;">
+                <small class="">Versão 1.1</small>
+            </div>
+    </nav>
+</aside>
+
+
+
+{% block body %}{% endblock  %}
+
+
+
+
+<!--Modal para Perfil do Usuario-->
+<div class="perfil-menu float-right" id="id-perfil-menu-box">
+    <div id="perfil-nomeUsuario" class="m-3 font-weight-bold text-primary">{{ current_user.usuario }}</div>
+    <div class="dropdown-divider"></div>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-dark btn-dados-usuario" data-element="#telaDadosUsuario">Perfil</a>
+        </li>
+        <!--
+        <li class="nav-item">
+            <a class="nav-link text-dark btn-criar-usuario" data-element="#telaCriarUsuario">Criar Novo Usuário</a>
+        </li>
+        -->             
+        <li class="nav-item">
+          <a class="nav-link text-muted" href={{ url_for('user.login') }}>Sair</a>
+        </li>
+      </ul>
+ </div> 
+
+
+ <!--Modal editar dados Usuario-->
+ <div class="hidden hide-container" id="telaDadosUsuario">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-dados-usuario tela-add-item border rounded shadow  p-4 bg-white">
+           <form action="" method="POST" enctype="multipart/form-data">
+                {% if formPerfil %}
+                {{ formPerfil.hidden_tag() }}
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Perfil</span>
+                    <button  class="close btn-dados-usuario " data-element="#telaDadosUsuario" data-dismiss="" aria-label="Fechar">
+                        <span class="btn-dados-usuario m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nomeUsuario">Nome de Usuario</label>
+                    {% if formPerfil.usuario.errors %}
+                        {{ formPerfil.usuario(class='form-control is-invalid')}}
+                        {% for error in formPerfil.usuario.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.usuario(class='form-control', value=current_user.usuario)}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    {% if formPerfil.nome.errors %}
+                        {{ formPerfil.nome(class='form-control is-invalid')}}
+                        {% for error in formPerfil.nome.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.nome(class='form-control', value=current_user.nome)}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    {% if formPerfil.email.errors %}
+                        {{ formPerfil.email(class='form-control is-invalid')}}
+                        {% for error in formPerfil.email.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.email(class='form-control', value=current_user.email)}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    {% if formPerfil.password.errors %}
+                        {{ formPerfil.password(class='form-control is-invalid')}}
+                        {% for error in formPerfil.password.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.password(class='form-control')}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="confirmSenha">Confirmar Senha</label>
+                    {% if formPerfil.confirm_password.errors %}
+                        {{ formPerfil.confirm_password(class='form-control is-invalid')}}
+                        {% for error in formPerfil.confirm_password.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.confirm_password(class='form-control')}}
+                    {% endif %}
+                </div>                
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    {% if formPerfil.telefone.errors %}
+                        {{ formPerfil.telefone(class='form-control is-invalid')}}
+                        {% for error in formPerfil.telefone.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.telefone(class='form-control', value=current_user.telefone)}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="dataNascimento">Data Nascimento</label>
+                    {% if formPerfil.dataNasc.errors %}
+                        {{ formPerfil.dataNasc(class='form-control is-invalid')}}
+                        {% for error in formPerfil.dataNasc.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{error}}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ formPerfil.dataNasc(class='form-control', value=dataNasc)}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ formPerfil.imagem.label() }}
+                    {{ formPerfil.imagem(class="form-control-file") }}
+                    {% if formPerfil.imagem.errors %}
+                        {% for error in formPerfil.imagem.errors %}
+                            <span class="text-danger">{{error}}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="d-none">
+                    {{ formPerfil.type( value='formPerfil')}} 
+                </div>
+                <div class="text-center  mt-5">
+                    {{ formPerfil.submit(class='btn btn-primary text-white')}}
+                    <button type="button" class="btn btn-secondary ml-4  btn-dados-usuario" data-element="#telaDadosUsuario">Cancelar</button>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal criar Usuario-->
+<div class="hidden hide-container" id="telaCriarUsuario">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-criar-usuario tela-add-item border rounded shadow  p-4 bg-white">
+            <!--Cria formulario para acesso ao sistema-->
+            <form class="bg-white " action="#" method="POST">
+                <div class="mb-5 text-center">
+                    <h3 class="text-info">Orquestra Criarte Digital</h3>
+                </div>
+                <div class="mb-3 text-center">
+                    <h4 class="text-info">Criar Conta</h4>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nome de usuário</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nome" value="" required />
+                </div>
+                <div class="form-group mb-2 text-dark">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value=""
+                        required />
+                </div>
+                <div class="form-group mb-2 text-dark">
+                    <label for="inputEmail">Confirme seu Email</label>
+                    <input type="email" class="form-control" id="ConfirmarEmail" placeholder="Email" value=""
+                        required />
+                </div>
+                <div class="form-group mb-2 text-dark">
+                    <label for="inputPassword">Senha</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Senha" value=""
+                        required />
+                </div>
+                <div class="form-group mb-2 text-dark">
+                    <label for="inputPassword">Confirme sua Senha</label>
+                    <input type="password" class="form-control" id="ConfirmarPassword"
+                        placeholder="Confirme sua Senha" value="" required />
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary" type="submit">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type='text/javascript' src="{{ url_for('static', filename='layout-slidebar.js') }}"></script>
+<script type='text/javascript' src="{{ url_for('static', filename='main.js') }}"></script>
+
+<script>
+ // exibe tabela com informacoes da escola selecionada
+$(function () {
+    
+    $(".open-info-escola").click(function (e) {              
+        e.preventDefault();
+        const el = $(this).data('element');
+        $(el).toggle();
+        const id = $(this).data('id');
+        const pane = $(this).data('pane');
+        var data
+        console.log('ajax')
+        $.ajax({        
+          type: "GET",
+          url: "{{url_for('admin.panel_select')}}",
+          data: {'pane': pane, 'id': id},
+          success: function(response){
+            console.log(response.nome)
+            //debugger
+            //Titulo da Unidade
+            $('#title-unidade').html(response.nome)
+            $('#title-endereco').html(response.endereco)
+            $('#title-contato').html(response.contato)
+            //coluna Turma
+            var tableTurma = $('#list-group-turma')
+            var row = ''
+            $.each(response.curso, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableTurma.html(row)
+            //coluna Equipe
+            var tableEquipe = $('#list-group-equipe')
+            var row = ''
+            $.each(response.equipe, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableEquipe.html(row)
+            //coluna Alunos
+            var tableAluno = $('#list-group-aluno')
+            var row = ''
+            $.each(response.aluno, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableAluno.html(row)
+            //coluna Acervo
+            var tableAcervo = $('#list-group-acervo')
+            var row = ''
+            $.each(response.acervo, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableAcervo.html(row)
+            const url = response.url
+            const id = response.id
+            $('.btn-edit-escola').attr('href', url)
+            $('.btn-edit-escola').attr('data-id', id)
+          }        
+        });
+    });
+
+
+    $(".open-info-turma").click(function (e) {              
+        e.preventDefault();
+        const el = $(this).data('element');
+        $(el).toggle();
+        const id = $(this).data('id');
+        const pane = $(this).data('pane');
+        var data
+        console.log('ajax')
+        $.ajax({        
+          type: "GET",
+          url: "{{url_for('admin.panel_select')}}",
+          data: {'pane': pane, 'id': id},
+          success: function(response){
+            //debugger
+            //Titulo da Unidade
+            $('.title-turma-nome').html(response.nome)
+            $('.title-turma-horario').html(response.horario)
+            $('.title-turma-gestor').html(response.gestor)
+            //coluna Turma
+            var tableTurma = $('.list-turma-aluno')
+            var row = ''
+            $.each(response.aluno, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableTurma.html(row)
+            //coluna Matricula
+            var tableEquipe = $('.list-turma-matricula')
+            var row = ''
+            $.each(response.matricula, function(i, value){
+                row += "<li class='list-group-item list-group-item-action text-center px-1'>" + value + "</li>";
+            } )
+            tableTurma.html(row)
+            
+            const url = response.url
+            const id = response.id
+            $('.btn-edit-curso').attr('href', url)
+            $('.btn-edit-curso').attr('data-id', id)
+          }        
+        });
+    });
+
+    $(".open-info-equipe").click(function (e) {              
+        e.preventDefault();
+        const el = $(this).data('element');
+        $(el).toggle();
+        const id = $(this).data('id');
+        const pane = $(this).data('pane');
+        var data
+        console.log(pane)
+        console.log(id)
+        $.ajax({        
+          type: "GET",
+          url: "{{url_for('admin.panel_select')}}",
+          data: {'pane': pane, 'id': id},
+          success: function(response){
+            console.log(response.nome)
+            //debugger
+            $('#form-nomeEquipe').val(response.nome)
+            $('#form-dataNascimento').val(response.data_nascimento)
+            $('#form-enderecoEquipe').val(response.endereco)
+            $('#form-emailEquipe').val(response.email)
+            $('#form-telefoneEquipe').val(response.telefone)
+                        
+            const url = response.url
+            const id = response.id
+            $('.btn-edit-equipe').attr('href', url)
+            $('.btn-edit-equipe').attr('data-id', id)
+          }        
+        });
+    });
+});
+
+
+</script>
+
+</body>
+</html>

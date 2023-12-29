@@ -1,0 +1,104 @@
+<div class="hidden hide-container" id="telaCadastroCurso">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-add-curso tela-add-item border rounded shadow  p-4 bg-white">
+            <form action="" method="POST">
+              {% if formCreateTurma %}
+                {{ formCreateTurma.hidden_tag() }}
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro de Turma</span>
+                    <button  class="close btn-add-curso " data-element="#telaCadastroCurso" data-dismiss="tela-add-curso" aria-label="Fechar">
+                        <span class="btn-add-curso m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nomeCurso">Nome do Turma</label>
+                    {% if formCreateTurma.nome.errors %}
+                    {{ formCreateTurma.nome(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.nome.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.nome(class='form-control', placeholder='Nome da Turma')}} 
+                  {% endif %} 
+                </div>
+                <div class="form-group">
+                    <label for="nomeUnidade">Unidade de Ensino</label>
+                    {% if formCreateTurma.unidade.errors %}
+                    {{ formCreateTurma.unidade(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.unidade.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.unidade(class='form-control', placeholder='Nome da Unidade')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="instrumentoCurso">Instrumento</label>
+                    {% if formCreateTurma.instrumento.errors %}
+                    {{ formCreateTurma.instrumento(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.instrumento.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.instrumento(class='form-control', placeholder='Nome do Instrumento')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="diaDaSemana">Dia da Semana</label>
+                    {% if formCreateTurma.dia_semana.errors %}
+                    {{ formCreateTurma.dia_semana(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.dia_semana.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.dia_semana(class='form-control')}} 
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="horario">Horário: </label>
+                    {% if formCreateTurma.horario.errors %}
+                    {{ formCreateTurma.horario(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.horario.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.horario(class='form-control')}} 
+                  {% endif %}                         
+                </div>
+                <div class="form-group">
+                    <label for="inputCoordenador">Coordenador do Curso</label>
+                    {% if formCreateTurma.nome_coordenador.errors %}
+                    {{ formCreateTurma.nome_coordenador(class='form-control is-invalid')}}
+                      {% for error in formCreateTurma.nome_coordenador.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formCreateTurma.nome_coordenador(class='form-control')}} 
+                  {% endif %} 
+                </div>
+                <div class="d-none">
+                    {{ formCreateTurma.type( value='formCreateTurma')}} 
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary ">Salvar</button>
+                    <button type="button" class="btn btn-secondary ml-4  btn-add-curso" data-element="#telaCadastroCurso">Cancelar</button>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>

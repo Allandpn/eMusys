@@ -1,0 +1,460 @@
+{% extends "layout.html" %}
+
+{% block title %}Administração{% endblock %}
+
+{% block pageCurrent %}Acervo{% endblock  %}
+
+{% block body %}
+
+<!--Conteudo Principal de Cada Pagina-->
+<div class="main mx-auto widht-page">
+    <div class="wrapper wrapper-tab border p-4 rounded shadow bg-white" style="overflow-x: auto;">
+
+        <!--Painel referente aos dados da Equipe da organização-->        
+        <div class="container-fluid ">
+            <div class="row mt-1">
+                <div class="text-muted">
+                    <h5>Instrumentos</h5>
+                </div>
+                
+                <div class="ml-auto text-right">   
+                    <a class="btn-add-tipo-instrumento toogle-hide" id="addTipoInstrumentoBtn" href="#" data-element="#telaCadastroTipoInstrumento"><i class="fa fa-2x fa-plus-circle text-info " aria-hidden="true"></i></a>
+                    <div class="small text-muted">Adicionar tipo de instrumento</div>
+                </div>                
+            </div>
+            <div class="row mt-2">
+                <div class="ml-auto text-right">   
+                    <button class="btn btn-info btn-add-instrumento toogle-hide" id="addInstrumentoBtn" data-element="#telaCadastroInstrumento">Novo Instrumento</button>
+                </div> 
+                <div class=" ml-4 ">
+                    <button class="btn btn-info btn-emp-instrumento" type="button" data-element="#telaEmprestimoInstrumento">Novo Empréstimo</button> 
+                </div>               
+            </div>
+            <div class="row mt-3 tela-wrapper-table" id="tabela-instrumentos-geral">
+                <table class="table table-hover tela-wrapper-table" id="table-instrumentos">
+                    <thead class="bg-gray">
+                        <tr>
+                            <th scope="col"><span class="mr-3 ">Cód.</span><a href="#" ><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Instrumento</span><a href="#" ><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Marca</span><a href="#"><i class="fa fa-sm fa-sort text-muted mr-0" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Unidade</span><a href="#"><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Data Empr.</span><a href="#"><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Aluno</span><a href="#"><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                            <th scope="col"><span class="mr-3 ">Info</span><a href="#"><i class="fa fa-sm fa-sort text-muted" aria-hidden="true"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for instrumento in  instrumentos %}
+                        <tr>
+                            <td>{{ instrumento['cod'] }}</td>
+                            <td>{{ instrumento['nome'] }}</td>
+                            <td>{{ instrumento['marca'] }}</td>
+                            <td>{{ instrumento['unidade'] }}</td>
+                            <td>{{ instrumento['emprestimo'] }}</td>
+                            <td>{{ instrumento['aluno'] }}</td><td>
+                              <a href="#" class="open-info-instrumento toogle-hide ml-auto"data-element="#dataInfoInstrumento"><i class="bx bx-file-find text-info mt-auto" style="font-size: 1.75rem"></i></a>
+                            </td>
+                          </tr>
+                      {% endfor %}                                    
+                    </tbody>
+                </table>
+            </div>                
+        </div>
+        
+    </div>
+</div>   
+
+
+
+<!--Tabela com os dados do Instrumento selecionada-->
+<div class="wrapper wrapper-dados-item wrapper-dados-instrumento border my-5 pr-4 pl-4  rounded shadow hidden hide-toggle-tab mx-auto widht-page" id="dataInfoInstrumento">
+    <div class="container-fluid py-3 mb-2">
+        <form >
+            <div class="row">
+                <div class="col-11 text-center mb-3">
+                    <span class="h5 text-info font-weight-bold ">Cadastro de Instrumento</span>
+                </div>
+                <div class="col ml-auto">
+                    <a href="#" class="mb-auto btn-edit-instrumento toogle-hide ml-1" data-element="#telaEditarInstrumento"><i class='bx bx-edit text-info'  style="font-size: 1.75rem"></i></a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-3">
+                    <label for="codigoInstrumento-at">Código</label>
+                <input value="" type="text" class="form-control bg-white" id="codigoInstrumento-at" placeholder="codigo" disabled>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="nomeInstrumento-at">Nome do Instrumento</label>
+                <input value="" type="text" class="form-control bg-white" id="nomeInstrumento-at" placeholder="instrumento" disabled>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="marcaInstrumento-at">Marca</label>
+                <input value="" type="text" class="form-control bg-white" id="marcaInstrumento-at" placeholder="marca" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dataAquisicao-at">Data Aquisição</label>
+                    <input value="" id="dataAquisicao-at" type="text" class="form-control" placeholder="dd/mm/aaaa"/>
+                </div>                                   
+                <div class="form-group col-md-4">
+                    <label for="estadoConserv-at">Estado de Conservação</label>
+                <input value="" type="text" class="form-control" id="estadoConserv-at" placeholder="estado de conservação">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="unidadeAcervo-at">Unidade do Instrumento</label>
+                <input value="" type="text" class="form-control" id="unidadeAcervo-at" placeholder="unidade">
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="turmaEquipe">Empréstimo Ativo</label>
+                <table class="table table-bordered bg-white text-center">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="row">Responsável</th>
+                            <th scope="row">Data Empréstimo</th>
+                            <th scope="row">Observações</th>
+                            <th scope="row">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-instrumento-ativo">
+                    <!--API DATA-->   
+                    </tbody>
+                </table>    
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="turmaEquipe">Histórico de Empréstimos</label>
+                <table class="table table-bordered bg-white text-center">
+                    <thead class="thead-light">
+                        <tr>                            
+                            <th scope="row">Responsável</th>
+                            <th scope="row">Data Empréstimo</th>
+                            <th scope="row">Data da Devolução</th>
+                            <th scope="row">Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-instrumento-historico">
+                    <!--API DATA-->
+                    </tbody>
+                </table>    
+            </div>
+            <div class="form-group">
+                <label for="anotacoesAluno">Anotações</label>
+                <textarea class="form-control bg-white" id="anotacoesAluno" rows="3" disabled></textarea>
+            </div> 
+        </form>
+    </div>
+</div>
+
+
+
+
+<!--Modal para adicionar Tipo Instrumento-->
+<div class="hidden hide-container" id="telaCadastroTipoInstrumento">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-add-tipo-instrumento tela-add-item border rounded shadow  p-4 bg-white">
+            <form class="post-Instrumento-Form" action="" method="POST" >
+                {{ formCreateTipoInstrumento.hidden_tag() }}
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro Tipo de Instrumento</span>
+                    <button  class="close btn-add-instrumento " data-element="#telaCadastroInstrumento" data-dismiss="tela-add-instrumento" aria-label="Fechar">
+                        <span class="btn-add-instrumento m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nomeInstrumento">Nome do Instrumento</label>
+                    {% if formCreateTipoInstrumento.instrumento.errors %}
+                        {{ formCreateTipoInstrumento.instrumento(class='form-control is-invalid')}}
+                        {% for error in formCreateTipoInstrumento.instrumento.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateTipoInstrumento.instrumento(class='form-control', placeholder="violino")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    <label for="codigoInstrumento">Codigo</label>
+                    {% if formCreateTipoInstrumento.codigo.errors %}
+                        {{ formCreateTipoInstrumento.codigo(class='form-control is-invalid')}}
+                        {% for error in formCreateTipoInstrumento.codigo.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateTipoInstrumento.codigo(class='form-control', placeholder="vln")}} 
+                    {% endif %}
+                </div>
+                <div class="d-none">
+                    {{ formCreateTipoInstrumento.type( value='formCreateTipoInstrumento')}} 
+                </div>                                   
+                <div class="text-center mt-3">
+                    {{ formCreateTipoInstrumento.submit(class='btn btn-primary text-white')}}
+                    <button type="button" class="btn btn-secondary ml-4  btn-add-tipo-instrumento" data-element="#telaCadastroTipoInstrumento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal para adicionar Instrumento-->
+<div class="hidden hide-container" id="telaCadastroInstrumento">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-add-instrumento tela-add-item border rounded shadow  p-4 bg-white">
+            <form class="post-Instrumento-Form" action="" method="POST" >
+                {{ formCreateInstrumento.hidden_tag() }}
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro de Instrumento</span>
+                    <button  class="close btn-add-instrumento " data-element="#telaCadastroInstrumento" data-dismiss="tela-add-instrumento" aria-label="Fechar">
+                        <span class="btn-add-instrumento m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nomeInstrumento">Nome do Instrumento</label>
+                    {% if formCreateInstrumento.instrumento.errors %}
+                        {{ formCreateInstrumento.instrumento(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.instrumento.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.instrumento(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    <label for="marcaInstrumento">Marca</label>
+                    {% if formCreateInstrumento.marca.errors %}
+                        {{ formCreateInstrumento.marca(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.marca.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.marca(class='form-control', placeholder="Marca")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    <label for="marcaInstrumento">Data de Aquisição</label>
+                    {% if formCreateInstrumento.data_aquisicao.errors %}
+                        {{ formCreateInstrumento.data_aquisicao(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.data_aquisicao.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.data_aquisicao(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="estadoConservacaoDoInstrumento">Estado de Conservação</label>
+                    {% if formCreateInstrumento.estado_instrumento.errors %}
+                        {{ formCreateInstrumento.estado_instrumento(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.estado_instrumento.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.estado_instrumento(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    <label for="unidadeId">Unidade do Instrumento</label>
+                    {% if formCreateInstrumento.unidade.errors %}
+                        {{ formCreateInstrumento.unidade(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.unidade.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.unidade(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    <label for="unidadeId">Anotações</label>
+                    {% if formCreateInstrumento.anotacoes.errors %}
+                        {{ formCreateInstrumento.anotacoes(class='form-control is-invalid')}}
+                        {% for error in formCreateInstrumento.anotacoes.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateInstrumento.anotacoes(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="d-none">
+                    {{ formCreateInstrumento.type( value='formCreateInstrumento')}} 
+                </div>                                   
+                <div class="text-center mt-3">
+                    {{ formCreateInstrumento.submit(class='btn btn-primary text-white')}}
+                    <button type="button" class="btn btn-secondary ml-4  btn-add-instrumento" data-element="#telaCadastroInstrumento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+ 
+<br>
+
+
+<!--Modal para Emprestimo Instrumento-->
+<div class="hidden hide-container" id="telaEmprestimoInstrumento">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-emp-instrumento tela-add-item border rounded shadow  p-4 bg-white">
+            <form id="post-instrumento-emprestimo">
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Empréstimo de Instrumento</span>
+                    <button  class="close btn-emp-instrumento " data-element="#telaEmprestimoInstrumento" data-dismiss="tela-emp-instrumento" aria-label="Fechar">
+                        <span class="btn-emp-instrumento m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="codigoInstrumento-em">Código:  </label>
+                    <select class="custom-select codigoInstrumento" id="codigoInstrumento-em">
+                        
+                    </select>
+                </div>                 
+                <div class="form-group">
+                    <label for="nomeInstrumentoEmprestimo-em">Nome do Instrumento</label>
+                <input value="" type="text" class="form-control bg-white" id="nomeInstrumentoEmprestimo-em" placeholder="Nome do Instrumento" disabled>
+                </div>
+                <div class="form-group ">
+                    <label for="marcaInstrumentoEmprestimo-em">Marca</label>
+                    <input value="" id="marcaInstrumentoEmprestimo-em" type="text" class="form-control bg-white" placeholder="marca" disabled>
+                </div>
+                <div class="form-group form-data-emprestimo">
+                    <label for="dataInstrumentoEmprestimo-em">Data Empréstimo</label>
+                    <input value="" id="dataInstrumentoEmprestimo-em" type="text" class="form-control bg-white" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="estadoConservEmprestimo-em">Estado de Conservação</label>
+                <input value="" type="text" class="form-control" id="estadoConservEmprestimo-em" placeholder="estado de conservação">
+                </div>
+                <div class="form-group">
+                    <label for="matriculaUsuarioEmprestimo-em">Matrícula do Aluno</label>
+                <input value="" type="text" class="form-control" id="matriculaUsuarioEmprestimo-em" placeholder="matrícula do aluno" required>
+                </div>                 
+ 
+                <div class="text-center mt-3">
+                    <button type="submit" id="btn-emprestar" class="btn disabled btn-secondary">Emprestar</button>
+                    <button type="button" class="btn btn-secondary ml-4  btn-emp-instrumento" data-element="#telaEmprestimoInstrumento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal para editar Instrumento-->
+<div class="hidden hide-container" id="telaEditarInstrumento">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-edit-instrumento tela-add-item border rounded shadow  p-4 bg-white">
+            <form class="post-InstrumentoEdit-Form">
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro de Instrumento</span>
+                    <button  class="close btn-add-instrumento " data-element="#telaEditarInstrumento" data-dismiss="tela-edit-instrumento" aria-label="Fechar">
+                        <span class="btn-edit-instrumento m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nomeInstrumento-ed">Nome do Instrumento</label>
+                <input value="" type="text" class="form-control" id="nomeInstrumento-ed" placeholder="Nome do Instrumento" name="nomeInstrumento-ed">
+                </div>
+                <div class="form-group ">
+                    <label for="marcaInstrumento-ed">Marca</label>
+                    <input value="" id="marcaInstrumento-ed" type="text" class="form-control" placeholder="marca" name="marcaInstrumento-ed"/>
+                </div>
+                <div class="form-group">
+                    <label for="estadoConservacaoDoInstrumento-ed">Estado de Conservação</label>
+                <input value="" type="text" class="form-control" id="estadoConservacaoDoInstrumento-ed" name="estadoConservacaoDoInstrumento-ed" placeholder="estado de conservação">
+                </div>
+                <div class="form-group ">
+                    <label for="unidadeId-ed">Unidade do Instrumento</label>
+                    <select class="custom-select" id="unidadeId-ed" name="unidadeId-ed">
+                        <option selected disabled>Nome da Unidade</option>
+                        <option value="1">Unidade 01 - Floresta</option>
+                        <option value="2">Unidade 02 - Barreiro</option>
+                        <option value="3">Unidade 03 - California</option>
+                    </select>
+                </div>                                   
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary post-intrumentoedit-btn">Salvar</button>
+                    <button type="button" class="btn btn-secondary ml-4  btn-edit-instrumento" data-element="#telaEditarInstrumento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Modal para Devolução Instrumento-->
+<div class="hidden hide-container" id="telaDevolucaoInstrumento">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-dev-instrumento tela-add-item border rounded shadow  p-4 bg-white">
+            <form id="patch-instrumento-emprestimo">
+                <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Devolução de Instrumento</span>
+                    <button  class="close btn-dev-instrumento " data-element="#telaDevolucaoInstrumento" data-dismiss="tela-dev-instrumento" aria-label="Fechar">
+                        <span class="btn-dev-instrumento m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="codigoInstrumento-dv">Código:  </label>
+                    <input value="" type="text" class="form-control bg-white" id="codigoInstrumento-dv" placeholder="cod" disabled>
+                </div>                 
+                <div class="form-group">
+                    <label for="nomeInstrumento-dv">Nome do Instrumento</label>
+                <input value="" type="text" class="form-control bg-white" id="nomeInstrumento-dv" placeholder="Nome do Instrumento" disabled>
+                </div>
+                <div class="form-group ">
+                    <label for="marcaInstrumento-dv">Marca</label>
+                    <input value="" id="marcaInstrumento-dv" type="text" class="form-control bg-white" placeholder="marca" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="dataDevolucao-dv">Data Devolução</label>
+                    <input value="" id="dataDevolucao-dv" type="date" class="form-control ml-2 p-1 date rounded  " style="border-color: gray;" required/>
+                </div>   
+                <div class="form-group">
+                    <label for="estadoConserv-dv">Estado de Conservação</label>
+                <input value="" type="text" class="form-control" id="estadoConserv-dv" placeholder="estado de conservação">
+                </div>                       
+                <div class="form-group">
+                    <label for="anotacoesInstrumento-dv">Anotações</label>
+                    <textarea class="form-control bg-white" id="anotacoesInstrumento-dv" rows="1"></textarea>
+                </div>  
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary ">Salvar</button>
+                    <button type="button" class="btn btn-secondary ml-4  btn-dev-instrumento" data-element="#telaDevolucaoInstrumento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block pageCurrent %}Dashboard{% endblock  %}
+
+{% block body %}
+
+<!--Conteudo Principal de Cada Pagina-->
+<div class="main justify-content-center mx-auto widht-page" >
+    <div class=" wrapper-tab mr-2 ml-2">   
+        <div class="row mb-4 justify-content-between" style="height: 130px;">
+            <div class="col  border p-2  mr-3  rounded shadow text-white" style="background-color: #4472C4;">
+                <div class="row justify-content-between mr-1 ml-1">
+                    <label  class="text-left  h6">Alunos</label>
+                    <i class="fa fa-user" aria-hidden="true" style="font-size: 1.6rem"></i>
+                </div>               
+                <div class="text-center mt-3">
+                    <span id="totalAlunosdash" class="h1  font-weight-bold">-</span>
+                </div>
+            </div>
+            <div class="col  border p-2  mr-3  rounded shadow text-white" style="background-color: #4472C4;">
+                <div class="row justify-content-between mr-1 ml-1">
+                    <label class="text-left  h6">Média idade</label>
+                    <i class="fa fa-child" aria-hidden="true" style="font-size: 1.6rem"></i>
+                </div>               
+                <div class="text-center mt-3">
+                    <span id="mediaIdadedash" class="h1  font-weight-bold">-</span>
+                </div>
+            </div>
+            <div class="col  border p-2  mr-3  rounded shadow text-white" style="background-color: #4472C4;">
+                <div class="row justify-content-between mr-1 ml-1">
+                    <label class="text-left  h6">Instrumentos</label>
+                    <i class="fa fa-music" aria-hidden="true" style="font-size: 1.6rem"></i>
+                </div>               
+                <div class="text-center mt-3">
+                    <span id="totalInstrdash" class="h1  font-weight-bold">-</span>
+                </div>
+            </div>
+            <div class="col  border p-2  mr-3  rounded shadow text-white" style="background-color: #4472C4;">
+                <div class="row justify-content-between mr-1 ml-1">
+                    <label class="text-left  h6">Turmas</label>
+                    <i class="fa fa-users" aria-hidden="true" style="font-size: 1.6rem"></i>
+                </div>               
+                <div class="text-center mt-3">
+                    <span id="totalTurmasdash" class="h1  font-weight-bold">-</span>
+                </div>
+            </div>
+            <div class="col  border p-2  rounded shadow text-white" style="background-color: #4472C4;">
+                <div class="row justify-content-between mr-1 ml-1">
+                    <label class="text-left  h6">Popular</label>
+                    <i class="fa fa-line-chart" aria-hidden="true"  style="font-size: 1.6rem"></i>
+                </div>               
+                <div class="text-center mt-3">
+                    <span id="popInstrdash" class="h1  font-weight-bold">-</span>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class=" wrapper  border p-4 rounded shadow bg-white justify-content-center">              
+        <div class="row mb-5">
+            <div class="col">
+                <div class="mb-5 align-items-end">
+                    <div class="">
+                        <label class="text-secondary h5">Alunos por Turma</label>
+                    </div>
+                    <div style="">
+                        <canvas class="" id="model05"></canvas>
+                    </div>
+                </div>
+                <div class="col-md justify-content-center mb-5">
+                    <div class="">
+                        <label class="text-secondary h5">Matrículas Por Unidade</label>
+                    </div>
+                    <div style="max-height: 500px;">
+                        <canvas id="model03"></canvas>
+                    </div>
+                </div>                
+                
+                <div class="col-md mb-5">
+                    <div class="">
+                        <label class="text-secondary h5 ">Idade dos Alunos</label>
+                    </div>
+                    <div style="max-height: 400px;">
+                        <canvas class="" id="model06"></canvas>
+                    </div>
+                </div>
+                
+                <div class="col-md justify-content-center mb-5">
+                    <div class="">
+                        <label class="text-secondary h5">Acervo/Empréstimos Por Unidade</label>
+                    </div>
+                    <div style="max-height: 400px;">
+                        <canvas id="model01"></canvas>
+                    </div>
+                    <div class="row">
+                        <div class="ml-3">
+                            <div class="mr-2">
+                                <button class="btn" style="background-color: #4472C4; pointer-events: none;"></button>
+                                <spam id="unidadeId0" style="font-size: smaller;">-</spam>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="mr-2">
+                                <button class="btn" style="background-color: #ED7D31;pointer-events: none;"></button>
+                                <spam id="unidadeId1" style="font-size: smaller;">-</spam>
+                            </div>
+                        </div>              
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-5">
+                    <div class="">
+                        <label class="text-secondary h5">Alunos Por Unidade</label>
+                    </div>
+                    <div style="">
+                        <canvas class="mx-auto" id="model02" style="min-height: 170px;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md mb-5">
+                    <div class="">
+                        <label class="text-secondary h5">Popularidade Instrumentos por Unidade</label>
+                    </div>
+                    <div>
+                        <canvas class="mx-auto" id="model04" style="min-height: 200px;"></canvas>
+                    </div>               
+                </div>
+                <div class="col-md mb-5">
+                    <div class="">
+                        <label class="text-secondary h5">Estado dos Instrumentos</label>
+                    </div>
+                    <div style="max-height: 400px;">
+                        <canvas class="mx-auto" id="model07" style="min-height: 200px;"></canvas>
+                    </div>
+                </div> 
+            </div>
+        </div>     
+    </div>
+</div>
+<br>
+
+
+
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,224 @@
+
+{% if formEditAluno %}
+
+    <div class="" id="telaCadastroAluno">
+    <div class="bg-container justify-content-center" >
+        <div class="background-dark">
+        </div>
+        <div class="tela-add-aluno tela-add-item border rounded shadow  p-4 bg-white ">
+            <form id="post-add-aluno-form" action="" method="POST" enctype="multipart/form-data">
+                {{ formEditAluno.hidden_tag() }}
+              <div class="text-center mb-3">
+                    <span class="h5 text-info font-weight-bold">Cadastro de Aluno</span>
+                    <button  class="close btn-add-aluno " data-element="#telaCadastroAluno" data-dismiss="tela-add-aluno" aria-label="Fechar">
+                        <span class="btn-add-aluno m-3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="nome-modal">Nome do Aluno</label>
+                    {% if formEditAluno.nome.errors %}
+                        {{ formEditAluno.nome(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.nome.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.nome(class='form-control', placeholder="Nome")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="email-modal">Email</label>
+                    {% if formEditAluno.email.errors %}
+                        {{ formEditAluno.email(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.email.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.email(class='form-control', placeholder="email")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="telefone-modal">Telefone</label>
+                    {% if formEditAluno.telefone.errors %}
+                        {{ formEditAluno.telefone(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.telefone.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.telefone(class='form-control', placeholder="telefone")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Data Nascimento</label>
+                    {% if formEditAluno.data_nasc.errors %}
+                        {{ formEditAluno.data_nasc(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.data_nasc.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.data_nasc(class='form-control', placeholder="data_nasc")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="enderecoEquipe">Endereço</label>
+                    {% if formEditAluno.endereco.errors %}
+                    {{ formEditAluno.endereco(class='form-control is-invalid')}}
+                      {% for error in formEditAluno.endereco.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditAluno.endereco(class='form-control', placeholder="Rua XV de Novembro, nº 0")}} 
+                  {% endif %}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                    <label for="inputBairro">Bairro</label>
+                    {% if formEditAluno.bairro.errors %}
+                    {{ formEditAluno.bairro(class='form-control is-invalid')}}
+                      {% for error in formEditAluno.bairro.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditAluno.bairro(class='form-control', placeholder="bairro")}} 
+                  {% endif %}
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputTelefone">Cidade</label>
+                        {% if formEditAluno.cidade.errors %}
+                    {{ formEditAluno.cidade(class='form-control is-invalid')}}
+                      {% for error in formEditAluno.cidade.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditAluno.cidade(class='form-control', placeholder="cidade")}} 
+                  {% endif %}
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label for="inputCEP">CEP</label>
+                    {% if formEditAluno.cep.errors %}
+                    {{ formEditAluno.cep(class='form-control is-invalid')}}
+                      {% for error in formEditAluno.cep.errors %}
+                        <div class="invalid-feedback">
+                          <span>{{error}}</span>
+                        </div>
+                      {% endfor %}
+                  {% else %} 
+                    {{ formEditAluno.cep(class='form-control', placeholder="CEP")}} 
+                  {% endif %}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Nome do Responsável</label>
+                    {% if formEditAluno.nome_responsavel.errors %}
+                        {{ formEditAluno.nome_responsavel(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.nome_responsavel.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.nome_responsavel(class='form-control', placeholder="nome")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Email do Responsável</label>
+                    {% if formEditAluno.email_responsavel.errors %}
+                        {{ formEditAluno.email_responsavel(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.email_responsavel.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.email_responsavel(class='form-control', placeholder="email")}} 
+                    {% endif %}
+                </div>                  
+                <div class="form-group">
+                    <label for="data_nasc-modal">Telefone do Responsável</label>
+                    {% if formEditAluno.telefone_responsavel.errors %}
+                        {{ formEditAluno.telefone_responsavel(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.telefone_responsavel.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.telefone_responsavel(class='form-control', placeholder="telefone")}} 
+                    {% endif %}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Data Admissão</label>
+                    {% if formEditAluno.data_admissao.errors %}
+                        {{ formEditAluno.data_admissao(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.data_admissao.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.data_admissao(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Turma</label>
+                    {% if formEditAluno.turma.errors %}
+                        {{ formEditAluno.turma(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.turma.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.turma(class='form-control')}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="data_nasc-modal">Anotações</label>
+                    {% if formEditAluno.anotacoes.errors %}
+                        {{ formEditAluno.anotacoes(class='form-control is-invalid')}}
+                        {% for error in formEditAluno.anotacoes.errors %}
+                        <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %} 
+                        {{ formEditAluno.anotacoes(class='form-control', placeholder="anotacoes")}} 
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ formEditAluno.imagem.label() }}
+                    {{ formEditAluno.imagem(class="form-control-file") }}
+                    {% if formEditAluno.imagem.errors %}
+                        {% for error in formEditAluno.imagem.errors %}
+                            <span class="text-danger">{{error}}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="d-none">
+                    {{ formEditAluno.type( value='formEditAluno')}} 
+                </div>         
+                <div class="text-center mt-3">
+                    {{ formEditAluno.submit(class='btn btn-primary text-white')}}
+                    <button type="button" class="btn btn-secondary ml-4  btn-add-aluno" data-element="#telaCadastroAluno">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endif %}

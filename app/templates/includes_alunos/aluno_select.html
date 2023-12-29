@@ -1,0 +1,117 @@
+
+
+<div class="wrapper hidden wrapper-dados-item wrapper-dados-aluno border my-5 pr-4 pl-4  rounded shadow hide-toggle-tab mx-auto widht-page" id="dataInfoAluno">
+    <div class="container-fluid py-3 mb-2">
+        <form >
+            <div class="row">
+                <div class="col-11 text-center mb-3">
+                    <span class="h5 text-info font-weight-bold ">Cadastro do Aluno</span>
+                </div>
+                <div class="col ml-auto">
+                    <a href="" class="mb-auto btn-edit-aluno toogle-hide ml-1" data-element="#telaCadastroAluno" data-id=""><i class='bx bx-edit text-info'  style="font-size: 1.75rem"></i></a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8 mb-3">
+                    <label for="nomeCurso">Nome do Aluno</label>
+                <input value="" type="text" class="form-control bg-white" id="nomeAluno-modal-selecao" placeholder="Nome" disabled>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="dataNascimento">Data Nascimento</label>
+                    <input value="" id="dataNascimento-modal-selecao" type="text" class="form-control ml-2 p-1 rounded  bg-white" placeholder=""  disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="enderecoAluno-modal-selecao">Endereço</label>
+                <input value="" type="text" class="form-control bg-white" id="enderecoAluno-modal-selecao" placeholder="Rua XV de Novembro, nº 0" disabled>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email-modal-selecao">Email</label>
+                <input value="" type="email" class="form-control bg-white" id="email-modal-selecao" placeholder="email" disabled>
+                </div>                                   
+                <div class="form-group col-md-6">
+                    <label for="telefone-modal-selecao">Telefone</label>
+                <input value="" type="text" class="form-control bg-white" id="telefone-modal-selecao" placeholder="telefone" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="nomeResponsavel-modal-selecao">Nome do(a) Responsável</label>
+                <input value="" type="text" class="form-control bg-white" id="nomeResponsavel-modal-selecao" placeholder="Nome" disabled>
+                </div>                                   
+                <div class="form-group col-md-4">
+                    <label for="telefoneResponsavel-modal-selecao">Telefone do(a) Responsável</label>
+                <input value="" type="text" class="form-control bg-white" id="telefoneResponsavel-modal-selecao" placeholder="telefone" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="emailResponsavel-modal-selecao">Email do(a) Responsável</label>
+                <input value="" type="text" class="form-control bg-white" id="emailResponsavel-modal-selecao" placeholder="email" disabled>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="turmaAluno-modal-selecao">Turma</label>
+                <input value="" type="text" class="form-control bg-white" id="turmaAluno-modal-selecao" placeholder="Turma" disabled>
+                </div>                                   
+                <div class="form-group col-md-4">
+                    <label for="instrumentoAluno-modal-selecao">Instrumento</label>
+                <input value="" type="text" class="form-control bg-white" id="instrumentoAluno-modal-selecao" placeholder="Instrumento" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dataMatricula-modal-selecao">Data da Matrícula</label>
+                <input value="" type="text" class="form-control bg-white" id="dataMatricula-modal-selecao" placeholder="dd/mm/aaaa" disabled>
+                </div>
+            </div> 
+            <br>
+            <div class="form-group">
+                <label for="tabela-emprestimos-alunos-modal-selecao">Emprestimos</label>
+                <table class="table table-bordered bg-white text-center" id="tabela-emprestimos-alunos-modal-selecao">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="row">Instrumento</th>
+                            <th scope="row">Código</th>
+                            <th scope="row">Data da Retirada</th>
+                            <th scope="row">Data da Devolução</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-emprestimos-alunos-modal-selecao-body">
+                        <!-- adicionado pela funcao PopulateTableSelect -->
+                    </tbody>
+                </table>    
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label for="tabela-doacoes-alunos-modal-selecao">Doações</label>
+                <table class="table table-bordered bg-white text-center" id="tabela-doacoes-alunos-modal-selecao">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="row">Valor</th>
+                            <th scope="row">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-emprestimos-alunos-modal-selecao-contribuicao">
+                        <!-- adicionado pela funcao PopulateTableSelect -->
+                    </tbody>
+                </table>    
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="anotacoesAluno-modal-selecao">Anotações</label>
+                <textarea class="form-control bg-white" id="anotacoesAluno-modal-selecao" rows="6" disabled></textarea>
+            </div>   
+            <br>                                               
+            <div class="form-group col-md-4">
+                <label for="dataDesligamento-modal-selecao">Data do Desligamento</label>
+            <input value="" type="text" class="form-control bg-white" id="dataDesligamento-modal-selecao" placeholder="dd/mm/aaaa" disabled>
+            </div>
+        </form>
+    </div>
+</div>
+
+

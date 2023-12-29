@@ -1,0 +1,212 @@
+<div class=" hidden hide-container " id="telaCadastroEquipe" >       
+    <div class="bg-container justify-content-center">
+        <div class="background-dark">
+        </div>
+        <div class="tela-add-equipe tela-add-item border rounded shadow  p-4 bg-white " > 
+            <form action="" method="POST" enctype="multipart/form-data">
+              {% if formCreateEquipe %}
+                {{ formCreateEquipe.hidden_tag() }}
+                    <div class="text-center mb-3">
+                        <span class="h5 text-info font-weight-bold">Cadastro de Colaborador</span>
+                        <button  class="close btn-add-equipe " data-element="#telaCadastroEquipe" data-dismiss="tela-add-equipe" aria-label="Fechar">
+                            <span class="btn-add-equipe m-3" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="form-group ">
+                            <label for="nomeCurso">Nome do Colaborador</label>
+                            {% if formCreateEquipe.nome.errors %}
+                            {{ formCreateEquipe.nome(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.nome.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                            {% else %} 
+                              {{ formCreateEquipe.nome(class='form-control', placeholder="Nome")}} 
+                            {% endif %}
+                        </div>                            
+                        <div class="form-group ">
+                            <label for="dataNascimento">Data Nascimento</label>
+                            {% if formCreateEquipe.dataNasc.errors %}
+                            {{ formCreateEquipe.dataNasc(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.dataNasc.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.dataNasc(class='form-control')}} 
+                          {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="enderecoEquipe">Endereço</label>
+                            {% if formCreateEquipe.endereco.errors %}
+                            {{ formCreateEquipe.endereco(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.endereco.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.endereco(class='form-control', placeholder="Rua XV de Novembro, nº 0")}} 
+                          {% endif %}
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                            <label for="inputBairro">Bairro</label>
+                            {% if formCreateEquipe.bairro.errors %}
+                            {{ formCreateEquipe.bairro(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.bairro.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.bairro(class='form-control', placeholder="bairro")}} 
+                          {% endif %}
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="inputTelefone">Cidade</label>
+                                {% if formCreateEquipe.cidade.errors %}
+                            {{ formCreateEquipe.cidade(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.cidade.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.cidade(class='form-control', placeholder="cidade")}} 
+                          {% endif %}
+                            </div>
+                            <div class="form-group col-md-3">
+                            <label for="inputCEP">CEP</label>
+                            {% if formCreateEquipe.cep.errors %}
+                            {{ formCreateEquipe.cep(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.cep.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.cep(class='form-control', placeholder="CEP")}} 
+                          {% endif %}
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            {% if formCreateEquipe.email.errors %}
+                            {{ formCreateEquipe.email(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.email.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.email(class='form-control', placeholder="email")}} 
+                          {% endif %}
+                        </div>                                   
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            {% if formCreateEquipe.telefone.errors %}
+                            {{ formCreateEquipe.telefone(class='form-control is-invalid')}}
+                              {% for error in formCreateEquipe.telefone.errors %}
+                                <div class="invalid-feedback">
+                                  <span>{{error}}</span>
+                                </div>
+                              {% endfor %}
+                          {% else %} 
+                            {{ formCreateEquipe.telefone(class='form-control', placeholder="telefone")}} 
+                          {% endif %}
+                        </div>
+                        <!--
+                        <div class="form-group mt-4">
+                            <div class="container-fluid d-flex justify-content-between">
+                                <label for="turmaEquipe">Turmas</label>
+                                <a class="btn-add-turma-equipe ml-auto" id="addTurmaEquipeBtn" href="#"><i class="fa fa-lg  fa-plus-circle text-info m-2" ></i></a> 
+                            </div>
+                            <ul class="list-group text-center equipe-list-turma">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    {#
+                                    {% if formCreateEquipe.turma1.errors %}
+                                        {{ formCreateEquipe.turma1(class='form-control is-invalid')}}
+                                        {% for error in formCreateEquipe.turma1.errors %}
+                                            <div class="invalid-feedback">
+                                                <span>{{error}}</span>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %} 
+                                        {{ formCreateEquipe.turma1(class='form-control')}} 
+                                    {% endif %}
+                                    #}                                 
+                                    <a class="btn-del-turma-equipe my-auto" href="#"><i class="fa-solid fa-lg fa-delete-left text-muted "></i></a>
+                                </li>                                    
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-4">
+                            <div class="container-fluid d-flex justify-content-between">
+                                <label for="instrumentoEquipe">Instrumentos</label>
+                                <a class="btn-add-instrumento-equipe ml-auto" id="addInstrumentoEquipeBtn" href="#"><i class="fa fa-lg  fa-plus-circle text-info m-2" ></i></a> 
+                            </div>
+                            <ul class="list-group text-center equipe-list-instr">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <select class="custom-select mr-2 border-0" id="diaDaSemana">
+                                        <option selected>Nome do Instrumento</option>
+                                        <option value="1">Violão</option>
+                                        <option value="2">Violino</option>
+                                        <option value="3">Saxofone</option>
+                                    </select>                                   
+                                    <a class="btn-del-instrumento-equipe my-auto" href="#"><i class="fa-solid fa-lg fa-delete-left text-muted "></i></a>
+                                </li>
+                            </ul>
+                        </div>                        
+                        -->
+                    <div class="form-group ">
+                      <label for="funcao">Unidade</label>
+                      {% if formCreateEquipe.unidade.errors %}
+                      {{ formCreateEquipe.unidade(class='form-control is-invalid')}}
+                        {% for error in formCreateEquipe.unidade.errors %}
+                          <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                          </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateEquipe.unidade(class='form-control')}} 
+                    {% endif %}
+                    </div>
+                    <div class="form-group ">
+                      <label for="funcao">Funcao</label>
+                      {% if formCreateEquipe.funcao.errors %}
+                      {{ formCreateEquipe.funcao(class='form-control is-invalid')}}
+                        {% for error in formCreateEquipe.funcao.errors %}
+                          <div class="invalid-feedback">
+                            <span>{{error}}</span>
+                          </div>
+                        {% endfor %}
+                    {% else %} 
+                      {{ formCreateEquipe.funcao(class='form-control', placeholder="Funcao")}} 
+                    {% endif %}
+                    </div>     
+                    <div class="form-group">
+                        {{ formCreateEquipe.imagem.label() }}
+                        {{ formCreateEquipe.imagem(class="form-control-file") }}
+                        {% if formCreateEquipe.imagem.errors %}
+                            {% for error in formCreateEquipe.imagem.errors %}
+                                <span class="text-danger">{{error}}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                      
+                    <div class="d-none">
+                        {{ formCreateEquipe.type( value='formCreateEquipe')}} 
+                    </div>
+                    <div class="text-center mt-3">
+                        {{ formCreateEquipe.submit(class='btn btn-primary text-white')}}
+                        <button type="button" class="btn btn-secondary ml-4  btn-add-equipe" data-element="#telaCadastroEquipe">Cancelar</button>
+                    </div>
+                    {% endif %}
+            </form>
+        </div>
+    </div>
+
+</div>
