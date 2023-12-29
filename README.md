@@ -1,5 +1,5 @@
 # eMusys
-#### Video Demo: [link para o video demo](https://youtu.be/b_LvOoOM-mE)
+#### Video Demo: https://youtu.be/b_LvOoOM-mE
 #### Description: Este resposítório contém os aquivos do Final Project do curso CS50’s Introduction to Computer Science da Harvard University. Trata-se de um sistema de gestão de uma escola de música, com controle de acervo e gestão de empréstimos de instrumentos para os alunos. 
 
 
