@@ -74,7 +74,7 @@ def get_unidade_selected(id):
     unidade = Unidade.query.get(id)
     unidade_ = {}
     unidade_["id"] = unidade.id
-    unidade_["url"] = url_for('update_unidade', id=unidade.id)
+    unidade_["url"] = url_for('admin.update_unidade', id=unidade.id)
     unidade_["nome"] = unidade.nome
     endereco = Endereco.query.filter_by(unidade_id = unidade.id).first()
     unidade_["endereco"] = (f'{endereco.rua}, {endereco.bairro}, {endereco.cidade}, {endereco.cep}')
@@ -108,7 +108,7 @@ def get_turma_selected(id):
     turma = Turma.query.get(id)
     turma_ = {}
     turma_["id"] = turma.id
-    turma_["url"] = url_for('update_turma', id=turma.id)
+    turma_["url"] = url_for('admin.update_turma', id=turma.id)
     turma_["nome"] = turma.nome
     turma_["horario"] = (f'Horário: {str(turma.horario)[:5]}')
     coordenador = Coordenador.query.filter_by(id=turma.coordenador_id).first()    

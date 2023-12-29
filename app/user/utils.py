@@ -45,7 +45,7 @@ def send_request_email(user):
                   sender='allandpncursos@gmail.com', 
                   recipients=[user.email])
     msg.body = f'''Para recuperar sua senha, acesse o link abaixo:
-    {url_for('reset_password', token=token, _external=True)}
+    {url_for('user.reset_password', token=token, _external=True)}
     
     Se você não fez essa solicitação igonre esse mail e nenhuma alteraão será efetuada
     '''
